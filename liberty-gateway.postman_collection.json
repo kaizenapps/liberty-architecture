@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "7b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+		"name": "Liberty Gateway API",
+		"description": "API collection for the Liberty Gateway microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Account Service",
+			"item": [
+				{
+					"name": "Add Key to Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keyType\": \"ed25519\",\n  \"publicKey\": \"0x...\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/accounts/:msaId/keys",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "accounts", ":msaId", "keys"],
+							"variable": [
+								{
+									"key": "msaId",
+									"value": "",
+									"description": "Message Source Account ID"
+								}
+							]
+						},
+						"description": "Add a new key to an existing account"
+					}
+				}
+			]
+		},
+		{
+			"name": "Graph Service",
+			"item": [
+				{
+					"name": "Get User Graph",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/graph/:msaId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "graph", ":msaId"],
+							"variable": [
+								{
+									"key": "msaId",
+									"value": "",
+									"description": "Message Source Account ID"
+								}
+							]
+						},
+						"description": "Fetch a user's social graph"
+					}
+				},
+				{
+					"name": "Follow User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"toMsaId\": 123\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/graph/:fromMsaId/connections",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "graph", ":fromMsaId", "connections"],
+							"variable": [
+								{
+									"key": "fromMsaId",
+									"value": "",
+									"description": "Source Message Source Account ID"
+								}
+							]
+						},
+						"description": "Follow another user"
+					}
+				},
+				{
+					"name": "Unfollow User",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/graph/:fromMsaId/connections/:toMsaId",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "graph", ":fromMsaId", "connections", ":toMsaId"],
+							"variable": [
+								{
+									"key": "fromMsaId",
+									"value": "",
+									"description": "Source Message Source Account ID"
+								},
+								{
+									"key": "toMsaId",
+									"value": "",
+									"description": "Target Message Source Account ID"
+								}
+							]
+						},
+						"description": "Unfollow a user"
+					}
+				}
+			]
+		},
+		{
+			"name": "Content Publishing Service",
+			"item": [
+				{
+					"name": "Upload Asset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"description": "Asset file to upload"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/assets",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "assets"]
+						},
+						"description": "Upload a media asset"
+					}
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fromId\": 123,\n  \"content\": \"Hello world!\",\n  \"assets\": [\"assetId1\", \"assetId2\"]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/broadcasts",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "broadcasts"]
+						},
+						"description": "Create a new post"
+					}
+				},
+				{
+					"name": "Create Reply",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fromId\": 123,\n  \"inReplyTo\": \"urlOfOriginalPost\",\n  \"content\": \"This is a reply\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/replies",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "replies"]
+						},
+						"description": "Create a reply to an existing post"
+					}
+				}
+			]
+		},
+		{
+			"name": "Content Watcher Service",
+			"item": [
+				{
+					"name": "Register Webhook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"https://example.com/webhook\",\n  \"filters\": {\n    \"msaIds\": [123, 456],\n    \"schemas\": [\"broadcast\", \"reply\"]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/webhooks",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "webhooks"]
+						},
+						"description": "Register a webhook for content updates"
+					}
+				},
+				{
+					"name": "Start Scanner",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/scanner/start",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "scanner", "start"]
+						},
+						"description": "Start the content scanner"
+					}
+				},
+				{
+					"name": "Get Scanner Status",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/scanner/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "v1", "scanner", "status"]
+						},
+						"description": "Get the current status of the content scanner"
+					}
+				}
+			]
+		}
+	]
+}
