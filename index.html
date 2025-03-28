@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="icon" href="https://www.projectliberty.io/wp-content/themes/project-liberty/dist/images/slash-red-double-large.svg" type="image/svg+xml">
+    <link rel="icon" href="https://www.projectliberty.io/wp-content/themes/project-liberty/dist/images/slash-red-double-large.svg" type="image/png">
     <style>
         .mermaid {
             background-color: white;
@@ -33,6 +33,31 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             margin: 1rem;
             overflow-x: auto;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #2563eb;
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #back-to-top:hover {
+            background-color: #1d4ed8;
         }
         .link-card {
             background-color: white;
@@ -118,51 +143,22 @@
             <img src="https://www.projectliberty.io/wp-content/themes/project-liberty/dist/images/slash-red-double-large.svg" alt="Project Liberty Logo" class="h-12 w-12">
             <h1 class="text-4xl font-bold text-center">Frequency Developer Gateway</h1>
         </div>
-        <p class="text-lg text-gray-600 text-center mb-8">Last updated: March 28, 2025</p>
+        <p class="text-lg text-gray-600 text-center mb-2">Last updated: March 28, 2025</p>
+        <p class="text-lg text-gray-600 text-center mb-8">Version: 1.0.0 <!-- Increment version: Major.Minor.SubMinor - Major/Minor by user, SubMinor by AI --></p>
 
         <div class="section mb-8">
-            <h2 class="text-2xl font-bold mb-4">Project Liberty Participation and Contribution Guidelines</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="link-card">
-                    <h3 class="text-xl font-semibold mb-2">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="https://forum.projectliberty.io" class="important-link" target="_blank">Community Forum →</a></li>
-                        <li><a href="https://dsnp.org/specs/" class="important-link" target="_blank">DSNP Specifications →</a></li>
-                        <li><a href="https://projectliberty.io/whitepaper" class="important-link" target="_blank">Project Liberty Whitepaper →</a></li>
-                    </ul>
-                </div>
-                <div class="link-card">
-                    <h3 class="text-xl font-semibold mb-2">Git Contribution Guidelines</h3>
-                    <ul class="space-y-2">
-                        <li><strong>Commit Messages:</strong> Follow conventional commits format (feat:, fix:, docs:, etc.)</li>
-                        <li><strong>Code Style:</strong> Use ESLint and Prettier with provided configurations</li>
-                        <li><strong>Branch Strategy:</strong> Create feature branches from main, use pull requests</li>
-                        <li><strong>Security:</strong> Report vulnerabilities to security@projectliberty.io</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
-                <p class="text-blue-800"><strong>Code of Conduct:</strong> We are committed to providing a welcoming and inclusive environment. Please read our <a href="https://github.com/ProjectLibertyLabs/gateway/blob/main/CODE_OF_CONDUCT.md" class="text-blue-600 hover:underline">Code of Conduct</a> before contributing.</p>
-            </div>
+            <h2 class="text-3xl font-bold mb-4">Table of Contents</h2>
+            <nav class="space-y-2">
+                <a href="#project-overview" class="block text-blue-600 hover:text-blue-800">Project Overview</a>
+                <a href="#scope-of-work" class="block text-blue-600 hover:text-blue-800">Scope of Work</a>
+                <a href="#microservices-breakdown" class="block text-blue-600 hover:text-blue-800">Microservices Breakdown</a>
+                <a href="#technical-architecture-section" class="block text-blue-600 hover:text-blue-800">Technical Architecture</a>
+                <a href="#deployment-section" class="block text-blue-600 hover:text-blue-800">Deployment</a>
+                <a href="#resources-links-section" class="block text-blue-600 hover:text-blue-800">Resources & Links</a>
+            </nav>
         </div>
 
-        <div class="section mb-8">
-            <h2 class="text-2xl font-bold mb-4">Important Links</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="link-card">
-                    <h3 class="text-xl font-semibold mb-2">Official Gateway Repository</h3>
-                    <p class="text-gray-600 mb-2">Access the actual gateway implementation for your projects.</p>
-                    <a href="https://github.com/ProjectLibertyLabs/gateway" class="important-link" target="_blank">ProjectLibertyLabs/gateway →</a>
-                </div>
-                <div class="link-card">
-                    <h3 class="text-xl font-semibold mb-2">Social App Template</h3>
-                    <p class="text-gray-600 mb-2">Start building your social app with Frequency integration.</p>
-                    <a href="https://github.com/ProjectLibertyLabs/social-app-template" class="important-link" target="_blank">ProjectLibertyLabs/social-app-template →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
+        <div class="section" id="project-overview">
             <h2 class="text-3xl font-bold mb-4">1. Project Overview</h2>
             <p class="text-lg text-gray-600 mb-4">The Frequency Developer Gateway is a suite of microservices designed to simplify interactions with the Frequency blockchain, bridging the gap between Web2 and Web3 development. It provides a familiar REST API interface that abstracts away complex blockchain operations, making it more accessible for traditional web developers. As a decentralized SSO solution, it offers OAuth2-style endpoints and standard flows that mirror traditional providers while leveraging blockchain technology for enhanced security, transparency, and user data sovereignty.</p>
             
@@ -221,10 +217,72 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">2. Microservices Breakdown</h2>
+        <div class="section" id="scope-of-work">
+            <h2 class="text-3xl font-bold mb-4">2. Scope of Work</h2>
+            <div class="space-y-6">
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">1. Maintenance</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Monitor and resolve issues reported on the <a href="https://github.com/LibertyDSNP" class="important-link" target="_blank">GitHub repository</a></li>
+                        <li>Update dependencies and libraries to ensure security and compatibility</li>
+                        <li>Optimize existing code for performance and scalability</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">2. Feature Enhancements</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Collaborate with Project Liberty to identify and prioritize new features</li>
+                        <li>Implement new features as specified in the project roadmap</li>
+                        <li>Ensure compatibility with the latest developments in the Frequency blockchain ecosystem</li>
+                    </ul>
+                    <div class="mt-4">
+                        <p class="font-semibold mb-2">Upcoming Features Include:</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li><a href="#technical-architecture-section" class="important-link">e2e Blockbox testing</a></li>
+                            <li>Support Ethereum addresses and keys</li>
+                            <li>Optimizations</li>
+                            <li><a href="#resources-links-section" class="important-link">Documentation Improvements</a></li>
+                            <li><a href="#deployment-section" class="important-link">Single deployment setup and documentation</a></li>
+                            <li>Error Handling Improvement</li>
+                            <li>Unified Swagger</li>
+                            <li><a href="#microservices-breakdown" class="important-link">Session & OAuth support in Gateway</a></li>
+                            <li><a href="#microservices-breakdown" class="important-link">Profile support in Account Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">3. Code Quality and Documentation</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Adhere to best practices in software development, including code reviews and testing</li>
+                        <li>Maintain and enhance project documentation to assist contributors and end-users</li>
+                        <li>Write unit, integration, and end-to-end tests to ensure system reliability</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">4. Community Engagement</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Assist contributors with pull requests and code reviews</li>
+                        <li>Respond to developer inquiries and provide technical guidance to companies integrating with the Frequency Developer Gateway</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-bold mb-4">5. Reporting</h3>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Provide bi-weekly progress updates to the designated person at Project Liberty</li>
+                        <li>Maintain a clear log of tasks completed and issues resolved</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="microservices-breakdown">
+            <h2 class="text-3xl font-bold mb-4">3. Microservices Breakdown</h2>
             
-            <h3 class="text-2xl font-bold mb-2">2.1 Account Service</h3>
+            <h3 class="text-2xl font-bold mb-2">3.1 Account Service</h3>
             <div class="mermaid">
             mindmap
                 root((Account Service))
@@ -258,7 +316,7 @@
                 </ul>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">2.2 Graph Service</h3>
+            <h3 class="text-2xl font-bold mb-2">3.2 Graph Service</h3>
             <div class="mermaid">
             mindmap
                 root((Graph Service))
@@ -289,7 +347,7 @@
                 </ul>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">2.3 Content Publishing Service</h3>
+            <h3 class="text-2xl font-bold mb-2">3.3 Content Publishing Service</h3>
             <div class="mermaid">
             mindmap
                 root((Content Publishing Service))
@@ -325,7 +383,7 @@
                 </ul>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">2.4 Content Watcher Service</h3>
+            <h3 class="text-2xl font-bold mb-2">3.4 Content Watcher Service</h3>
             <div class="mermaid">
             mindmap
                 root((Content Watcher Service))
@@ -358,10 +416,10 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">3. Technical Architecture</h2>
+        <div class="section" id="technical-architecture-section">
+            <h2 class="text-3xl font-bold mb-4">4. Technical Architecture</h2>
             
-            <h3 class="text-2xl font-bold mb-2">3.1 Component Interaction</h3>
+            <h3 class="text-2xl font-bold mb-2">4.1 Component Interaction</h3>
             <div class="mermaid">
             sequenceDiagram
                 participant Client as Client Application
@@ -393,7 +451,7 @@
                 CWS->>Client: Deliver Content Updates via Webhook
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">3.2 Technology Stack</h3>
+            <h3 class="text-2xl font-bold mb-2">4.2 Technology Stack</h3>
             <div class="mermaid">
             mindmap
                 root((Technology Stack))
@@ -425,23 +483,23 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">4. Setup & Installation</h2>
+        <div class="section" id="deployment-section">
+            <h2 class="text-3xl font-bold mb-4">5. Setup & Installation</h2>
             
-            <h3 class="text-2xl font-bold mb-2">4.1 Prerequisites</h3>
+            <h3 class="text-2xl font-bold mb-2">5.1 Prerequisites</h3>
             <ul>
                 <li><code>Docker</code> and <code>Docker Compose</code> for container management</li>
                 <li><code>Node.js</code> for local development</li>
                 <li><code>mdBook</code> for building documentation</li>
             </ul>
             
-            <h3 class="text-2xl font-bold mb-2">4.2 Quick Start Guide</h3>
+            <h3 class="text-2xl font-bold mb-2">5.2 Quick Start Guide</h3>
             <pre><code>git clone git@github.com:ProjectLibertyLabs/gateway.git
 cd gateway
 ./start.sh
 </code></pre>
             
-            <h3 class="text-2xl font-bold mb-2">4.3 Service-Specific Setup</h3>
+            <h3 class="text-2xl font-bold mb-2">5.3 Service-Specific Setup</h3>
             <div class="card">
                 <div class="card-title">Account Service Setup</div>
                 <pre><code># Copy environment template
@@ -509,9 +567,9 @@ npm run start:content-watcher:dev
         </div>
 
         <div class="section">
-            <h2 class="text-3xl font-bold mb-4">5. Usage Examples</h2>
+            <h2 class="text-3xl font-bold mb-4">6. Usage Examples</h2>
             
-            <h3 class="text-2xl font-bold mb-2">5.1 Building a Social Application</h3>
+            <h3 class="text-2xl font-bold mb-2">6.1 Building a Social Application</h3>
             <div class="mermaid">
             flowchart TD
                 subgraph "User Authentication Flow"
@@ -539,7 +597,7 @@ npm run start:content-watcher:dev
                 end
             </div>
 
-            <h3 class="text-2xl font-bold mb-2">5.2 API Usage Examples</h3>
+            <h3 class="text-2xl font-bold mb-2">6.2 API Usage Examples</h3>
             
             <h4 class="text-xl font-bold mb-1">Account Service</h4>
             <pre><code>// Create a user account
@@ -612,9 +670,9 @@ GET /api/v1/scanner/status</code></pre>
         </div>
 
         <div class="section">
-            <h2 class="text-3xl font-bold mb-4">6. Development & Testing</h2>
+            <h2 class="text-3xl font-bold mb-4">7. Development & Testing</h2>
             
-            <h3 class="text-2xl font-bold mb-2">6.1 Development Environment</h3>
+            <h3 class="text-2xl font-bold mb-2">7.1 Development Environment</h3>
             <div class="card">
                 <div class="card-title">Local Development</div>
                 <ul>
@@ -625,7 +683,7 @@ GET /api/v1/scanner/status</code></pre>
                 </ul>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">6.2 Testing</h3>
+            <h3 class="text-2xl font-bold mb-2">7.2 Testing</h3>
             <div class="card">
                 <div class="card-title">Unit Tests</div>
                 <pre><code># Run account service tests
@@ -656,7 +714,7 @@ npm run test:e2e:content-publishing
 npm run test:e2e:content-watcher</code></pre>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2">6.3 Code Quality</h3>
+            <h3 class="text-2xl font-bold mb-2">7.3 Code Quality</h3>
             <pre><code># Run linter
 npm run lint
 
@@ -664,98 +722,8 @@ npm run lint
 npm run format</code></pre>
         </div>
 
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">7. Deployment</h2>
-            
-            <h3 class="text-2xl font-bold mb-2">7.1 Docker Deployment</h3>
-            <div class="mermaid">
-            flowchart TD
-                A[Pull Repository] --> B[Configure Environment Variables]
-                B --> C[Build Docker Images]
-                C --> D[Start Container Services]
-                D --> E[Verify Service Health]
-                E --> F[Configure External Access]
-            </div>
-            
-            <h3 class="text-2xl font-bold mb-2">7.2 Cloud Deployment Options</h3>
-            <div class="card">
-                <div class="card-title">AWS Deployment</div>
-                <ul>
-                    <li>EC2 instances or ECS for container management</li>
-                    <li>ElastiCache for Redis</li>
-                    <li>S3 for storage (alternative to IPFS)</li>
-                    <li>API Gateway for API management</li>
-                    <li>CloudWatch for monitoring</li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <div class="card-title">Kubernetes Deployment</div>
-                <ul>
-                    <li>Container orchestration with Kubernetes</li>
-                    <li>Helm charts for deployment management</li>
-                    <li>Service mesh for inter-service communication</li>
-                    <li>Persistent volumes for data storage</li>
-                    <li>Horizontal Pod Autoscaling for scalability</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">8. Advanced Topics</h2>
-            
-            <h3 class="text-2xl font-bold mb-2">8.1 Scalability Considerations</h3>
-            <ul>
-                <li>Horizontal scaling of API services</li>
-                <li>Redis clustering for queue management</li>
-                <li>Load balancing across services</li>
-                <li>Database sharding strategies</li>
-                <li>Caching layers for performance optimization</li>
-            </ul>
-            
-            <h3 class="text-2xl font-bold mb-2">8.2 Security Best Practices</h3>
-            <ul>
-                <li>Key management and rotation</li>
-                <li>API authentication and authorization</li>
-                <li>Rate limiting and DDoS protection</li>
-                <li>Data encryption at rest and in transit</li>
-                <li>Regular security audits</li>
-            </ul>
-            
-            <h3 class="text-2xl font-bold mb-2">8.3 Integration with Existing Systems</h3>
-            <div class="mermaid">
-            flowchart LR
-                subgraph "Legacy Systems"
-                    A[Existing Social Platform]
-                    B[User Database]
-                    C[Content Management]
-                end
-                
-                subgraph "Gateway Integration"
-                    D[Account Migration]
-                    E[Graph Synchronization]
-                    F[Content Publishing Bridge]
-                    G[Content Indexing]
-                end
-                
-                subgraph "Frequency Blockchain"
-                    H[Decentralized Data]
-                end
-                
-                A --> D
-                B --> D
-                D --> H
-                B --> E
-                E --> H
-                C --> F
-                F --> H
-                H --> G
-                G --> A
-            </div>
-        </div>
-
-        <div class="section">
-            <h2 class="text-3xl font-bold mb-4">9. Resources & Links</h2>
+        <div class="section" id="resources-links-section">
+            <h2 class="text-3xl font-bold mb-4">8. Resources & Links</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="card">
@@ -800,46 +768,48 @@ npm run format</code></pre>
                 </a>
                 <a href="https://www.instagram.com/pro_jectliberty/" class="text-gray-600 hover:text-pink-600" target="_blank" title="Instagram">
                     <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.51-0.615,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15 M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z"></path></svg>
-                </a>
-                <a href="https://www.facebook.com/projectlibertyactionnetwork/" class="text-gray-600 hover:text-blue-700" target="_blank" title="Facebook">
-                    <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path></svg>
-                </a>
-                <a href="https://www.youtube.com/@Project_Liberty" class="text-gray-600 hover:text-red-600" target="_blank" title="YouTube">
-                    <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z"></path></svg>
+            </a>
+            <a href="https://www.facebook.com/projectlibertyactionnetwork/" class="text-gray-600 hover:text-blue-700" target="_blank" title="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2 0.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/@Project_Liberty" class="text-gray-600 hover:text-red-600" target="_blank" title="YouTube">
+                <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z"></path></svg>
             </a>
         </div>
     </div>
 
-    <style>
-        .social-link {
-            color: #4B5563;
-            transition: color 0.2s;
-        }
-        .social-link:hover {
-            color: #1F2937;
-        }
-    </style>
+    <button id="back-to-top" aria-label="Back to top">
+        <span class="material-icons">arrow_upward</span>
+    </button>
 
     <script>
         mermaid.initialize({
             startOnLoad: true,
             theme: 'default',
             securityLevel: 'loose',
-            maxTextSize: 99999999,
-            flowchart: {
-                htmlLabels: true,
-                useMaxWidth: true,
-                curve: 'basis'
-            },
-            mindmap: {
-                padding: 16,
-                useMaxWidth: true
-            }
         });
 
         // Add resize handler for Mermaid diagrams
         window.addEventListener('resize', function() {
             mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
